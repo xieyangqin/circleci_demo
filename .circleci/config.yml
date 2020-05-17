@@ -12,7 +12,7 @@ jobs:
             - "61:87:6b:06:38:bf:89:6f:33:f4:36:f3:c1:b3:35:1d"
       - checkout
       - restore_cache
-          keys:
+          key:
             - dependecies_demo
       - run:
           name: Install
