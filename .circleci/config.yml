@@ -1,17 +1,19 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
-jobs:
-  build-and-test:
-    executor:
-      name: node/default
-    steps:
+jobs: 
+  build:
+    docker:
+      - image: circleci/node:1
+    branches:
+      only:
+        - circleci-project-setup
+    steps: 
+      - add_ssh_keys:
+          fingerprints:
+            - "61:87:6b:06:38:bf:89:6f:33:f4:36:f3:c1:b3:35:1d"
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
-workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+      - run: 
+        name: Install
+        command: npm install
+      - run: 
+        name: Build
+        command: npm run build
